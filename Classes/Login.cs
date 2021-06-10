@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using ProjetoProdutos.Interfaces;
 
 namespace ProjetoProdutos.Classes
 {
-    public class Login
+    public class Login : Marca, ILogin
     {
-        public bool logado { get; set; }
+        public bool logado = false;
 
-        public void login()
+        public Login()
         {
             bool acabouMar = false;
             bool acabouLog = false;
@@ -15,6 +16,8 @@ namespace ProjetoProdutos.Classes
             int c = 1;
             Marca marca = new Marca();
             List<Marca> ListaMarca = marca.ListarMarca();
+            Usuario usuario = new Usuario();
+            List<Usuario> ListaUsers = usuario.ListarUser();
 
             do
             {
@@ -57,40 +60,61 @@ namespace ProjetoProdutos.Classes
                                         marc.NomeMarca = Console.ReadLine();
                                         marc.codigo = c;
                                         c++;
-
+                                        marc.DataCadastro = DateTime.Now;
                                         marca.CadastrarMarca(marc);
                                         acabouMar = false;
 
                                         break;
 
                                     case "2":
-                                        Console.WriteLine("Marcas Cadastradas:");
-
-                                        foreach (var i in ListaMarca)
+                                        if (ListaMarca.Count <= 0)
                                         {
-                                            Console.WriteLine($@"
-___________________________
+                                            Console.WriteLine("Lista Vazia!");
+
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Marcas Cadastradas:");
+
+                                            foreach (var i in ListaMarca)
+                                            {
+                                                Console.WriteLine($@"
+=============================
     Marca:{i.NomeMarca}     
     Código: {i.codigo}      
-    Data: {i.DataCadastro}");
-                                            acabouMar = false;
+    Data: {i.DataCadastro}
+=============================
+    ");
+                                                acabouMar = false;
+                                            }
                                         }
 
                                         break;
 
+
                                     case "3":
 
-                                        Console.WriteLine("Qual o nome da marca que deseja remover?");
-                                        foreach (var i in ListaMarca)
+                                        if (ListaMarca.Count <= 0)
                                         {
-                                            Console.WriteLine($"Marca:{i.NomeMarca}");
+                                            Console.WriteLine("Lista vazia!");
+
                                         }
+                                        else
+                                        {
+                                            Console.WriteLine("Qual o nome da marca que deseja remover?");
+                                            foreach (var i in ListaMarca)
+                                            {
+                                                Console.WriteLine($"Marca:{i.NomeMarca}");
+                                            }
 
-                                        marca.marcaRemover = Console.ReadLine();
-                                        marca.DeletarMarca();
-                                        Console.WriteLine($"Qualquer marca com o nome {marca.marcaRemover} foi removida.");
+                                            marca.marcaRemover = Console.ReadLine();
+                                            marca.DeletarMarca();
+                                            Console.WriteLine($"Qualquer marca com o nome {marca.marcaRemover} foi removida.");
 
-                                        acabouMar = false;
+
+
+                                            acabouMar = false;
+                                        }
                                         break;
 
                                     case "4":
@@ -108,22 +132,32 @@ ___________________________
                             break;
 
                         case "2":
+                            Logar();
+
+
                             acabouLog = false;
                             break;
 
                         case "3":
 
-                            Console.WriteLine("Qual o nome da marca que deseja remover?");
-                            foreach (var i in ListaMarca)
+                            if (ListaUsers.Count <= 0)
                             {
-                                Console.WriteLine($"Marca:{i.NomeMarca}");
+                                Console.WriteLine("Sem usários cadastrados");
+
                             }
+                            else
+                            {
+                                Usuario user = new Usuario();
+                                Console.WriteLine("Qual o nome do usuário que deseja remover?");
+                                foreach (var i in ListaUsers)
+                                {
+                                    Console.WriteLine($"Usuário :{i.nomeUser}");
+                                }
 
-                            marca.marcaRemover = Console.ReadLine();
-                            marca.DeletarMarca();
-                            Console.WriteLine($"Qualquer marca com o nome {marca.marcaRemover} foi removida.");
-
-                            acabouLog = false;
+                                user.userRemover = Console.ReadLine();
+                                user.DeletarUser();
+                                Console.WriteLine($"Qualquer usuário com o nome {user.userRemover} foi removido.");
+                            }
                             break;
 
                         case "4":
@@ -144,15 +178,33 @@ ___________________________
                 } while (acabouLog == false);
             } while (acabouTudo == false);
         }
-        public string logar()
+
+
+
+        public string Logar()
         {
+
+            do
+            {
+                if (true)
+                {
+
+                }
+                else
+                {
+
+                }
+
+            } while (logado == false);
             logado = true;
             return "logado";
         }
-        public string deslogar()
+        public string Deslogar()
         {
             logado = false;
             return "logado";
         }
+
+
     }
 }
