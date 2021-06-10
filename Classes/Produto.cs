@@ -16,7 +16,7 @@ namespace ProjetoProdutos.Classes
             return nomeProduto;
         }
 
-        //public void ListarProduto()
+        //public void ListarProduto( )
 
         public string deletarProduto()
         {
