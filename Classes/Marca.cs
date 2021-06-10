@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using ProjetoProdutos.Interfaces;
 
 namespace ProjetoProdutos.Classes
 {
-    public class Marca
+    public class Marca : IMarca
     {
         public int codigo { get; set; }
         public string NomeMarca { get; set; }
-        public string DataCadastro { get; set; }
+        public DateTime DataCadastro { get; set; }
         public string marcaRemover { get; set; }
         List<Marca> ListaMarca = new List<Marca>();
         public void CadastrarMarca(Marca marca)
